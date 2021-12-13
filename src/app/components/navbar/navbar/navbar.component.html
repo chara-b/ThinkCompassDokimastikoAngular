@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div>
+<!--the purple menu bar-->
+<mat-toolbar color="primary" class="makeToolbarsticky">
+    
+    <mat-toolbar-row>                
+        <mat-icon class="signuppage-icon">person</mat-icon>
+        <h1> Login Page</h1>
+        <nav class="menu-spacer">
+            <a mat-button [routerLink]="'/'" routerLinkActive="active"><mat-icon>home</mat-icon> Home</a>
+            <a mat-button [routerLink]="'/signup'" routerLinkActive="active"><mat-icon>account_circle</mat-icon> Sign Up</a>
+            <a mat-button [routerLink]="'/login'" routerLinkActive="active"><mat-icon>person</mat-icon> Login </a>
+        </nav>
+    </mat-toolbar-row>
+</mat-toolbar>
+        
+        <div class="loginuser" [routerLink]="'/userlogin'">
+            <mat-icon class="label-icon">person</mat-icon>
+            
+            
+            <p class="label1">User Login</p>
+
+        </div>
+
+        
+        <div class="loginemployee" [routerLink]="'/orglogin'">
+            <mat-icon class="label-icon">people</mat-icon>
+
+           
+            <p class="label2">Organization Login</p>
+
+
+        </div>
+
+        <div class="linkdiv">
+            <a [routerLink]="'/adminlogin'" class="link"> If you're the admin click here. </a>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
