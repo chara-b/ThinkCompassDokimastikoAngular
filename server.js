@@ -47,10 +47,10 @@ connection.connect(function(err) {
 
 
     
-// add data in db
-app.post('/api/add', function(req, res) {
+// add todo in db
+app.post('/api/addtodo', function(req, res) {
 
-    connection.query('INSERT INTO records (activity, currentDay, currentMonth, currentYear, Scheduled_at, duration, priority) VALUES (?, ?, ?, ?, ?, ?, ?)', [act, curD, curM, curY, SchAT, dur, prior], function(err) {
+    connection.query('INSERT INTO todos (keimeno, date_created, date_due, status) VALUES (?, ?, ?, ?)', [req.body.keimeno, req.body.date_created, req.body.date_due, req.body.status], function(err) {
        
         if(err) {
             res.send({serversais: 'Error no data inserted'});
@@ -70,12 +70,12 @@ app.post('/api/add', function(req, res) {
 
 
 
-// get data
-app.post('/api/get', (req, res) => {
+// get todo
+app.post('/api/gettodo', (req, res) => {
 
-    connection.query('SELECT email, day, time FROM appointmentsdb.approvedappointments WHERE org = ?', [req.body.org], (err, rows) => {
+    connection.query('SELECT keimeno, date_created, date_due, status FROM todos', (err, rows) => {
         if(err) {
-            res.send({serversais: 'Error... Could not get appointments for ' + req.body.org});
+            res.send({serversais: 'Error... Could not get todos'});
         }
         else {
             res.send(rows)
@@ -96,16 +96,16 @@ app.post('/api/get', (req, res) => {
 
 
 
-// delete data
-app.post('/api/deleteappointment', function(req, res){
+// delete todo
+app.post('/api/deletetodo', function(req, res){
     
-    connection.query('DELETE FROM appointmentsdb.approvedappointments WHERE email = ? AND org = ? AND day = ? AND time = ?', [req.body.email, req.body.org, req.body.day, req.body.time], (err) => {
+    connection.query('DELETE FROM todos WHERE id = ?', [req.body.id], (err) => {
        
         if(err) {
-           res.send({serversais: 'Sorry, could not delete your appointment.'});
+           res.send({serversais: 'Sorry, could not delete your todo.'});
         }
         else{
-            res.send({serversais: 'Selected appointment deleted successfully'});
+            res.send({serversais: 'Selected todo deleted successfully'});
         }
        
       });
@@ -113,25 +113,16 @@ app.post('/api/deleteappointment', function(req, res){
 });
 
 
-// put data
-app.put('/records/:id', function(req, res){
+// put/update todo status
+app.post('api/updatetodostatus', function(req, res){
 
-    var act = req.body.activity; // the incoming json's first key's value
-    var curM = req.body.currentMonth;
-    var curD = req.body.currentDay;
-    var curY = req.body.currentYear;
-    var SchAT = req.body.Scheduled_at;
-    var dur = req.body.duration;
-    var prior = req.body.priority;
-
-
-connection.query('UPDATE records SET activity = ?, currentDay = ?, currentMonth = ?, currentYear = ?, Scheduled_at = ?, duration = ?, priority = ? WHERE id = ?', [act, curD, curM, curY, SchAT, dur, prior, req.params.id], function(err) {
+connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, req.body.id], function(err) {
        
             if(err) {
                res.send({serversais: 'Error no data updated'});
             }
            else {
-               res.send({serversais: 'Selected record has been successfully updated'});
+               res.send({serversais: 'Selected todo has been successfully updated'});
             }
           });
 
