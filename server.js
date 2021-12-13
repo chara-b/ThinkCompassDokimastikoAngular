@@ -53,7 +53,7 @@ app.post('/api/addtodo', function(req, res) {
     connection.query('INSERT INTO todos (keimeno, date_created, date_due, status) VALUES (?, ?, ?, ?)', [req.body.keimeno, req.body.date_created, req.body.date_due, req.body.status], function(err) {
        
         if(err) {
-            res.send({serversais: 'Error no data inserted'});
+            res.send({serversais: 'Error no todo inserted'});
         }
         else {
             res.send({serversais: 'Successfully inserted into DataBase'});
@@ -70,7 +70,7 @@ app.post('/api/addtodo', function(req, res) {
 
 
 
-// get todo
+// get todos
 app.post('/api/gettodo', (req, res) => {
 
     connection.query('SELECT keimeno, date_created, date_due, status FROM todos', (err, rows) => {
@@ -86,10 +86,6 @@ app.post('/api/gettodo', (req, res) => {
 })
 
         
-
-
-
-
 
 
 
@@ -113,6 +109,22 @@ app.post('/api/deletetodo', function(req, res){
 });
 
 
+// delete multiple todos
+app.post('/api/deletemultipletodo', function(req, res){
+
+    connection.query('DELETE FROM todos WHERE id IN (?)', [req.body.ids], (err) => {
+       
+        if(err) {
+           res.send({serversais: 'Sorry, could not delete your multiple todos.'});
+        }
+        else{
+            res.send({serversais: 'Selected todos deleted successfully'});
+        }
+       
+      });
+
+});
+
 // put/update todo status
 app.post('api/updatetodostatus', function(req, res){
 
@@ -127,6 +139,22 @@ connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, r
           });
 
 });
+
+// put/update multiple todos status
+app.post('api/updatemultipletodostatus', function(req, res){
+
+    connection.query('UPDATE todos SET status = ? where id IN (?)', [req.body.status, req.body.ids], function(err) {
+           
+                if(err) {
+                   res.send({serversais: 'Error no multiple todos updated'});
+                }
+               else {
+                   res.send({serversais: 'Selected todos has been successfully updated'});
+                }
+              });
+    
+    });
+    
 
 
 
