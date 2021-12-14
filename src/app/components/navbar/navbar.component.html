@@ -12,18 +12,63 @@
 <mat-toolbar color="primary" class="makeToolbarsticky">
     
     <mat-toolbar-row>                
-        <mat-icon class="signuppage-icon">person</mat-icon>
         <h1> Todos </h1>
-        <nav class="menu-spacer">
-            <button (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
-            <button (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
+     
+        <nav class="ml-4">
+            <button mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
+            <button mat-raised-button color="primary" (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
         </nav>
+
+        <span class="item-spacer"></span>
+
+
+        <mat-slide-toggle
+          [color]="color"
+          [disabled]="disabled"
+          (click)="onChange()">
+            Filters {{checked ? 'on' : 'off'}} 
+        </mat-slide-toggle>
+
+        <div *ngIf="checked">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Month</mat-label>
+                <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
+                  <mat-option *ngFor="let option of months" value="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+                <mat-form-field class="search-full-width" appearance="fill">
+                    <mat-label>Year</mat-label>
+                    <input matInput placeholder="Enter year...">
+              </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
+              <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+            <mat-form-field class="search-full-width" appearance="fill">
+              <mat-label>Search</mat-label>
+              <input matInput #message maxlength="256" placeholder="Search by keywords...">
+              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+       
+        </div>
+
     </mat-toolbar-row>
 </mat-toolbar>
         
 
     </div>
 
+
+
+    
 
 </body>
 </html>

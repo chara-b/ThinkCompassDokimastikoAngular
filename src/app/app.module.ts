@@ -24,6 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [HttpserviceService],
   bootstrap: [AppComponent] 
