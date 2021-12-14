@@ -15,10 +15,14 @@ export class NavbarComponent implements OnInit {
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
   selectedStatusOption = '';
   selectedMonthOption = '';
+  location: string = '/todos';
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {
+
+  }
 
   ngOnInit(): void {
+
   }
 
   onChange(){
@@ -30,9 +34,11 @@ export class NavbarComponent implements OnInit {
   }
 
   NavigateTotodos(){
-    this.router.navigate(['todos'], {relativeTo:this.route});
+    this.location = '/todos';
+    this.router.navigate(['todos']);
   }
   NavigateToHistogram(){
-    this.router.navigate(['histogram'], {relativeTo:this.route});
+    this.location = '/histogram';
+    this.router.navigate(['histogram']);
   }
 }

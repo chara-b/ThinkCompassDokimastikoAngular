@@ -2,22 +2,23 @@
 <mat-toolbar color="primary" class="row makeToolbarsticky">    
     <mat-toolbar-row>  
      
-          <h1 class="col-md"> Todos </h1>     
-          <nav class="col-md"> 
-            <button mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
+          <h1 class="col-md-1"> Todos </h1>     
+          <nav class="col-md-3 p-0"> 
+            <button class="ml-2 mr-2" mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
             <button mat-raised-button color="primary" (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
           </nav>
        
     <!--<span class="item-spacer"></span>-->  
           <mat-slide-toggle
-          class="col-md filters-height"
+          *ngIf="!location.includes('/histogram')"
+          class="col-md-1 p-0 filters-height"
           [color]="color"
           [disabled]="disabled"
           (click)="onChange()">
             Filters {{checked ? 'on' : 'off'}} 
           </mat-slide-toggle>
 
-        <div class="col-md">   
+        <div class="col-md-4"  *ngIf="!location.includes('/histogram')">   
           <div *ngIf="checked" class="filters-height">
             <mat-form-field class="mat-form-field-width">
                 <mat-label>Month</mat-label>
@@ -42,7 +43,7 @@
               </mat-form-field>       
           </div>
         </div>
-        <div class="col-md right-align">
+        <div class="col-md right-align" *ngIf="!location.includes('/histogram')">
           <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
         </div>
 
