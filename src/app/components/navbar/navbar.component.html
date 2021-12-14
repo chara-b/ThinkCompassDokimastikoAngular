@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div>
+<!--the purple menu bar-->
+<mat-toolbar color="primary" class="makeToolbarsticky">
+    
+    <mat-toolbar-row>                
+        <mat-icon class="signuppage-icon">person</mat-icon>
+        <h1> Todos </h1>
+        <nav class="menu-spacer">
+            <button (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>home</mat-icon> Todos </a>
+            <button (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>account_circle</mat-icon> Histogram </a>
+        </nav>
+    </mat-toolbar-row>
+</mat-toolbar>
+        
+
+    </div>
+
+
+</body>
+</html>
