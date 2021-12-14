@@ -1,74 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-
-<div>
 <!--the purple menu bar-->
-<mat-toolbar color="primary" class="makeToolbarsticky">
-    
-    <mat-toolbar-row>                
-        <h1> Todos </h1>
+<mat-toolbar color="primary" class="row makeToolbarsticky">    
+    <mat-toolbar-row>  
      
-        <nav class="ml-4">
+          <h1 class="col-md"> Todos </h1>     
+          <nav class="col-md"> 
             <button mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
             <button mat-raised-button color="primary" (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
-        </nav>
-
-        <span class="item-spacer"></span>
-
-
-        <mat-slide-toggle
+          </nav>
+       
+    <!--<span class="item-spacer"></span>-->  
+          <mat-slide-toggle
+          class="col-md filters-height"
           [color]="color"
           [disabled]="disabled"
           (click)="onChange()">
             Filters {{checked ? 'on' : 'off'}} 
-        </mat-slide-toggle>
+          </mat-slide-toggle>
 
-        <div *ngIf="checked">
-
-            <mat-form-field appearance="fill">
+        <div class="col-md">   
+          <div *ngIf="checked" class="filters-height">
+            <mat-form-field class="mat-form-field-width">
                 <mat-label>Month</mat-label>
                 <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
                   <mat-option *ngFor="let option of months" value="option">{{option}}</mat-option>
                 </mat-select>
               </mat-form-field>
-
-                <mat-form-field class="search-full-width" appearance="fill">
-                    <mat-label>Year</mat-label>
-                    <input matInput placeholder="Enter year...">
+              <mat-form-field class="mat-form-field-width">
+                <mat-label>Year</mat-label>
+                <input matInput placeholder="Enter year...">
               </mat-form-field>
-
-
-        <mat-form-field appearance="fill">
-            <mat-label>Status</mat-label>
-            <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
-              <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-
-            <mat-form-field class="search-full-width" appearance="fill">
-              <mat-label>Search</mat-label>
-              <input matInput #message maxlength="256" placeholder="Search by keywords...">
-              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-            </mat-form-field>
-       
+              <mat-form-field class="mat-form-field-width">
+                <mat-label>Status</mat-label>
+                <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
+                  <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="search-width">
+                <mat-label>Search</mat-label>
+                <input matInput #message maxlength="256" placeholder="Search by keywords...">
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+              </mat-form-field>       
+          </div>
         </div>
+        <div class="col-md right-align">
+          <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
+        </div>
+
 
     </mat-toolbar-row>
 </mat-toolbar>
-        
 
-    </div>
-
-
-
-    
-
-</body>
-</html>

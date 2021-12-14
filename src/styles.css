@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
 /* You can add global styles to this file, and also import other style files */
 * {
     margin: 0;
@@ -9,6 +10,11 @@
     position: sticky; 
     top: 0; /* Sets the sticky toolbar to be on top */
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.right-align {
+  display: flex;
+  margin: auto;
 }
 
 /* custom scrollbar */

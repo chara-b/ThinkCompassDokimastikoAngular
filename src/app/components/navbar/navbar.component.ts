@@ -25,7 +25,9 @@ export class NavbarComponent implements OnInit {
     this.checked = !this.checked
   }
 
-
+  OpenPopUpToAddNewTodo(){
+    
+  }
 
   NavigateTotodos(){
     this.router.navigate(['todos'], {relativeTo:this.route});

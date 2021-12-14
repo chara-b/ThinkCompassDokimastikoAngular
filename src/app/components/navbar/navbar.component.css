@@ -1,9 +1,20 @@
-
+/*
 .item-spacer {
     flex: 1 1 auto;
 }
+*/
+.filters-height {
+    font-size: 13px
+}
 
-  
-.search-full-width {
-    width: 100%;
+.search-width {
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mat-form-field-width {
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
