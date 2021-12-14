@@ -3,50 +3,31 @@
     <mat-toolbar-row>  
      
           <h1 class="col-md-1"> Todos </h1>     
-          <nav class="col-md-3 p-0"> 
+          <nav class="col-md-3 p-0 navbar navbar-expand-lg"> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
             <button class="ml-2 mr-2" mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
             <button mat-raised-button color="primary" (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
           </nav>
-       
-    <!--<span class="item-spacer"></span>-->  
+
+
           <mat-slide-toggle
-          *ngIf="!location.includes('/histogram')"
-          class="col-md-1 p-0 filters-height"
-          [color]="color"
-          [disabled]="disabled"
-          (click)="onChange()">
-            Filters {{checked ? 'on' : 'off'}} 
+            *ngIf="!location.includes('/histogram')"
+            class="col-md-1 p-0 filters-height"
+            [color]="color"
+            [disabled]="disabled"
+            (click)="onChange()">
+              Filters {{checked ? 'on' : 'off'}} 
           </mat-slide-toggle>
-
-        <div class="col-md-4"  *ngIf="!location.includes('/histogram')">   
-          <div *ngIf="checked" class="filters-height">
-            <mat-form-field class="mat-form-field-width">
-                <mat-label>Month</mat-label>
-                <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
-                  <mat-option *ngFor="let option of months" value="option">{{option}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="mat-form-field-width">
-                <mat-label>Year</mat-label>
-                <input matInput placeholder="Enter year...">
-              </mat-form-field>
-              <mat-form-field class="mat-form-field-width">
-                <mat-label>Status</mat-label>
-                <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
-                  <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="search-width">
-                <mat-label>Search</mat-label>
-                <input matInput #message maxlength="256" placeholder="Search by keywords...">
-                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-              </mat-form-field>       
+       
+          <!--<span class="item-spacer"></span>-->  
+          <app-filters class="col-md-5" [location]="location" [checked]="checked"></app-filters><!--the filters component receives this location property at the @Input decorator.. according to specific location filters must be displayed or hidden that's why we pass the value of the location which is actually the route string that we are in to /histogram or /todos-->
+          
+          <div class="col-md right-align" *ngIf="!location.includes('/histogram')">
+            <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
           </div>
-        </div>
-        <div class="col-md right-align" *ngIf="!location.includes('/histogram')">
-          <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
-        </div>
-
 
     </mat-toolbar-row>
 </mat-toolbar>
