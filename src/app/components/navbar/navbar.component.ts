@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.router.navigate(['todos']);
   }
 
   onChange(){

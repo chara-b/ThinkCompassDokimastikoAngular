@@ -1,33 +1,48 @@
 <!--the purple menu bar-->
-<mat-toolbar color="primary" class="row makeToolbarsticky">    
+<mat-toolbar color="primary" class="makeToolbarsticky">    
     <mat-toolbar-row>  
      
-          <h1 class="col-md-1"> Todos </h1>     
-          <nav class="col-md-3 p-0 navbar navbar-expand-lg"> 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         
+          <nav class="navbar navbar-expand-lg"> 
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
 
-            <button class="ml-2 mr-2" mat-raised-button color="primary" (click)='NavigateTotodos()' routerLinkActive="active"><mat-icon>checklist</mat-icon> Todos </button>
-            <button mat-raised-button color="primary" (click)='NavigateToHistogram()' routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Histogram </button>
-          </nav>
-
-
-          <mat-slide-toggle
-            *ngIf="!location.includes('/histogram')"
-            class="col-md-1 p-0 filters-height"
-            [color]="color"
-            [disabled]="disabled"
-            (click)="onChange()">
-              Filters {{checked ? 'on' : 'off'}} 
-          </mat-slide-toggle>
-       
-          <!--<span class="item-spacer"></span>-->  
-          <app-filters class="col-md-5" [location]="location" [checked]="checked"></app-filters><!--the filters component receives this location property at the @Input decorator.. according to specific location filters must be displayed or hidden that's why we pass the value of the location which is actually the route string that we are in to /histogram or /todos-->
-          
-          <div class="col-md right-align" *ngIf="!location.includes('/histogram')">
-            <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
-          </div>
+           
+            <div class="collapse navbar-collapse" id="navbarContent">
+              <ul class="navbar-nav">
+                <li class="nav-item ml-2 mr-2">
+                  <h1> Todos </h1>   
+                </li>
+                <li class="nav-item ml-2 mr-1">
+                  <button class="ml-4 mr-2" mat-raised-button color="primary" (click)='NavigateTotodos()' ><mat-icon>checklist</mat-icon> Todos </button>
+                </li> 
+                <li class="nav-item ml-1 mr-2">
+                  <button mat-raised-button color="primary" (click)='NavigateToHistogram()' ><mat-icon>bar_chart</mat-icon> Histogram </button>                                 
+                </li>
+                <li class="nav-item ml-2 mr-2">
+                  <mat-slide-toggle
+                    *ngIf="!location.includes('/histogram')"
+                    class="ml-3 filters-height"
+                    [color]="color"
+                    [disabled]="disabled"
+                    (click)="onChange()">
+                      Filters {{checked ? 'on' : 'off'}} 
+                  </mat-slide-toggle>
+                </li>
+                <li class="nav-item ml-2 filters-height" style="background-color: brown;">
+                  <!--<span class="item-spacer"></span>-->  
+                  <app-filters [location]="location" [checked]="checked"></app-filters><!--the filters component receives this location property at the @Input decorator.. according to specific location filters must be displayed or hidden that's why we pass the value of the location which is actually the route string that we are in to /histogram or /todos-->
+                </li>
+                <li class="nav-item ml-2">
+                  <div class="right-align" *ngIf="!location.includes('/histogram')">
+                    <button mat-raised-button color="primary" (click)='OpenPopUpToAddNewTodo()'><mat-icon>add</mat-icon> Add Todo </button>
+                  </div>  
+                </li> 
+              </ul>  
+            </div>     
+          </nav>        
 
     </mat-toolbar-row>
 </mat-toolbar>

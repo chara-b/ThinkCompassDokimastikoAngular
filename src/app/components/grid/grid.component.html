@@ -1,1 +1,34 @@
-<p>grid works!</p>
+<div class="table-responsive">
+    <table matSort (matSortChange)="sortData($event)" class="table table-hover table-primary table-striped mat-elevation-z8">
+        <thead>
+        <tr>
+            <th scope="col">Select All</th>
+            <th scope="col">Text</th>
+            <th mat-sort-header="date_created" scope="col">Date Created</th>
+            <th mat-sort-header="date_due" scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="tableIsLoading">            
+            <mat-spinner class="m-0"></mat-spinner>
+        </tbody>
+        <tbody *ngIf="!tableIsLoading">
+        <tr *ngFor="let dessert of sortedData">
+            <td>{{dessert.name}}</td>
+            <td>{{dessert.calories}}</td>
+            <td>{{dessert.fat}}</td>
+            <td>{{dessert.carbs}}</td>
+            <td>{{dessert.protein}}</td>
+            <td>{{dessert.protein}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               class="paginator-at-the-bottom-of-screen"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event"
+               aria-label="Select page">
+    </mat-paginator>
+</div>
