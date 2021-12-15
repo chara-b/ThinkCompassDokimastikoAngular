@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { Todo } from 'src/app/post';
 import { HttpserviceService } from '../httpservice.service';
+import { EditStatusDialogComponent } from './edit-status-dialog/edit-status-dialog.component';
 
 export interface selectAll {
   todo: any;
@@ -118,12 +119,59 @@ export class GridComponent implements OnInit {
       }
     });
   }
+  TodoSubmittedSoRefreshTable(){
+    this.ngOnInit();
+  }
+
+
+  edit() { // updates status for one todo else for multiple
+
+    const dialogRef = this.dialog.open(EditStatusDialogComponent, { // open the component AddOrgDialogComponent inside an angular material dialog popup
+      width: '300px',
+      panelClass: 'app-edit-status-dialog',
+      disableClose: true,
+      position: { top: '10px' },
+      data: {
+          // no data to pass inside the modal for now
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let completedTodosArray = this.selectAll.subSelects.filter(obj => {return obj.completed == true})
+    if(completedTodosArray.length == 1) {// if equals with 1 this means that we have selected 1 todo to update so call the respective api for 1 todo update
+  
+      const status_plus_id = {status: result.status, id: completedTodosArray[0].todo.id};
+
+      this.http.updateTodoStatus(status_plus_id).subscribe(res => {
+        this.snackbar.open('todo just updated', 'Dismiss', {duration: 5000})
+        this.ngOnInit()
+      });
+  
+  
+
+    }else { // else call the api for multiple todos update
+      let ids: Array<Number> = [];
+      completedTodosArray.forEach(todo => {//this todo parameter here is a whole object with properties todo completed and color
+        ids.push(todo.todo.id);
+      });
+      
+      const status_plus_ids = {status: result.status, ids: ids};
+
+      this.http.updateMultipleTodosStatus(status_plus_ids).subscribe(res => {
+        this.snackbar.open('todos just updated', 'Dismiss', {duration: 5000})
+        this.ngOnInit()
+      });
+  
+    }
+    })  
+    
+  }
 
   delete(){
     let completedTodosArray = this.selectAll.subSelects.filter(obj => {return obj.completed == true})
     if(completedTodosArray.length == 1) {// if equals with 1 this means that we have selected 1 todo to delete so call the respective api for 1 todo deletion
     
-      const id = this.selectAll.subSelects[0].todo.id;
+      const id = completedTodosArray[0].todo.id;
 
       this.http.deleteTodo(id).subscribe(res => {
         this.snackbar.open('todo just deleted', 'Dismiss', {duration: 5000})
@@ -139,7 +187,7 @@ export class GridComponent implements OnInit {
       });
       
       this.http.deleteMultipleTodo(ids).subscribe(res => {
-        this.snackbar.open('todo just deleted', 'Dismiss', {duration: 5000})
+        this.snackbar.open('todos just deleted', 'Dismiss', {duration: 5000})
         this.ngOnInit()
       });
   

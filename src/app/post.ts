@@ -6,3 +6,11 @@ export interface Todo {
     status: any;
 
 }
+
+export interface TodoWithId {
+    id: any;
+    keimeno: any;
+    date_created: any;
+    date_due: any;
+    status: any;
+}

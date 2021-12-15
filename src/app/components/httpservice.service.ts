@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of,  throwError } from 'rxjs';
-import { Todo } from '../post';
+import { Todo, TodoWithId } from '../post';
 
 @Injectable({
   providedIn: 'root'
@@ -45,18 +45,18 @@ export class HttpserviceService {
     }
 
     // Update a Todo status in db
-    updateTodoStatus(_todo: Todo, id: Number) {
+    updateTodoStatus(todo_status_value_plus_id_value_as_object: object) { // to update we don't only need the id but the status value accordingly
 
-      const status = JSON.stringify(_todo.status); // this holds just the todo status only
-  
-      return this.http.post(this.ROOT_URL + '/api/updatetodostatus', [status, id], this.httpOptions);
+      //todo_status_value_plus_id_value_as_object looks like this {status: todo.status, id: todo.id}; 
+      const status_plus_id = JSON.stringify(todo_status_value_plus_id_value_as_object);
+      return this.http.post(this.ROOT_URL + '/api/updatetodostatus', status_plus_id, this.httpOptions);
     }
 
-    // Update a Todos status in db
-    updateMultipleTodosStatus(_todo: Todo, ids: Array<Number>) {
+    // Update multiple Todos status in db
+    updateMultipleTodosStatus(status_plus_ids_: object) { //status_plus_ids is an object where the 2nd property is an array of ids
 
-      const status = JSON.stringify(_todo.status); // this holds just the todo status only
+      const status_plus_ids = JSON.stringify(status_plus_ids_);
   
-      return this.http.post(this.ROOT_URL + '/api/updatemultipletodostatus', [status, ids], this.httpOptions);
+      return this.http.post(this.ROOT_URL + '/api/updatemultipletodostatus', status_plus_ids, this.httpOptions);
     }
 }

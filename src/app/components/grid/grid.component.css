@@ -13,8 +13,17 @@ table {
 .delete-btn {
     background-color: rgb(44, 56, 126);
 }
+
 .delete-btn:hover {
     background-color: tomato;
+}
+
+.update-btn {
+    background-color: rgb(44, 56, 126);
+}
+
+.update-btn:hover {
+    background-color: teal;
 }
 
 

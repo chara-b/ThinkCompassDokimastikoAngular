@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Todo } from 'src/app/post';
 import { AddNewTodoDialogComponent } from './add-new-todo-dialog/add-new-todo-dialog.component';
 
 @Component({
@@ -10,6 +11,7 @@ import { AddNewTodoDialogComponent } from './add-new-todo-dialog/add-new-todo-di
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() newTodoSubmitted: EventEmitter<Todo> =  new EventEmitter;
   status = ['Working', 'New', 'Done', 'Cancelled'];
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
   selectedStatusOption = '';
@@ -42,6 +44,10 @@ export class NavbarComponent implements OnInit {
             // no data to pass inside the modal for now
         }
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.newTodoSubmitted.emit()
+      })  
 
   }
 

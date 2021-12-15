@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" (newTodoSubmitted)="TodoSubmittedSoRefreshTable()">
     <table matSort (matSortChange)="sortTodos($event)" class="table table-hover table-primary table-striped mat-elevation-z8">
         <thead>
         <tr>
@@ -10,7 +10,6 @@
             <th mat-sort-header="date_created" scope="col">Date Created</th>
             <th mat-sort-header="date_due" scope="col">Due Date</th>
             <th scope="col">Status</th>
-            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody *ngIf="tableIsLoading">            
@@ -25,9 +24,6 @@
             <td>{{todo.date_created}}</td>
             <td>{{todo.date_due}}</td>
             <td>{{todo.status}}</td>
-            <td>
-                <button class="ml-4 mr-2" mat-raised-button color="primary"><mat-icon>edit</mat-icon> Edit </button>
-            </td>
         </tr>
         </perfect-scrollbar>
         </tbody>     
@@ -37,7 +33,11 @@
         <button *ngIf="allComplete || someComplete()" 
             class="mt-4 delete-btn ml-4 mr-2" 
             mat-fab color="primary" (click)="delete()"><mat-icon>delete</mat-icon>
-        </button>   
+        </button>  
+        <button *ngIf="allComplete || someComplete()" 
+        class="mt-4 update-btn ml-4 mr-2" 
+        mat-fab color="primary" (click)="edit()"><mat-icon>edit</mat-icon>
+    </button>    
         <mat-paginator [length]="length"
                [pageSize]="pageSize"
                class="paginator-at-the-bottom-of-screen"

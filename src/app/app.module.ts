@@ -37,6 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import { EditStatusDialogComponent } from './components/grid/edit-status-dialog/edit-status-dialog.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -50,7 +51,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ButtonComponent,
     NavbarComponent,
     AddNewTodoDialogComponent,
-    ArrayOfParentComponents // this array holds AppComponent and GridComponent declarations .. it is exported at app-routing.module.ts and since we wrap the declarations in this array we don't need to declare those components separately again as the rest components
+    ArrayOfParentComponents,
+    EditStatusDialogComponent // this array holds AppComponent and GridComponent declarations .. it is exported at app-routing.module.ts and since we wrap the declarations in this array we don't need to declare those components separately again as the rest components
   ],
   imports: [
     BrowserModule,

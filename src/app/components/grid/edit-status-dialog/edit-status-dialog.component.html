@@ -1,0 +1,38 @@
+<div>
+     
+    <div class="row p-3 add-new-todo-dialog-header">
+        <span class="col-md-6">Edit Todo</span>
+
+        <span class="col-md-6 right-align" (click)="cancel()">
+            <i class="material-icons" style="cursor: pointer;">clear</i>
+        </span>
+    </div>     
+
+
+
+   
+
+        
+    <div class="row">
+        <mat-form-field class="text-width mr-2 ml-2">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName='status' [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
+               <mat-option *ngFor="let option of status" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+
+<br>
+
+<div class="row flex-center">
+    <button mat-raised-button color="primary" type="submit" (click)="edit_todo()" [disabled]="selectedStatusOption === ''">
+        <mat-icon>save</mat-icon>
+        <span>Αποθήκευση</span>
+    </button>
+
+</div>
+
+</div>
+
