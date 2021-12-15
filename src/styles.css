@@ -25,8 +25,13 @@
   margin: auto;
 }
 
+.top-align {
+  display: flex;
+  margin: auto;
+  top: 0%;
+}
+
 .flex-center {
-    height: 100%;
     padding: 0;
     margin: 0;
     display: flex;
@@ -51,10 +56,6 @@
     position: fixed; 
     bottom:0%;
     width:100%; 
-}
-
-.mat-select-value {
-  color: white !important;
 }
 
 .mat-select-arrow {

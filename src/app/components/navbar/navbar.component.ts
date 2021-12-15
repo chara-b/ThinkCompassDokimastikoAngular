@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
   OpenPopUpToAddNewTodo(){
 
       const dialogRef = this.dialog.open(AddNewTodoDialogComponent, { // open the component AddOrgDialogComponent inside an angular material dialog popup
-        width: '500px',
+        width: '300px',
         panelClass: 'app-add-new-todo-dialog',
         disableClose: false,
         position: { top: '10px' },

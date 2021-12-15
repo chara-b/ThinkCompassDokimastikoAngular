@@ -13,9 +13,9 @@ export class AddNewTodoDialogComponent implements OnInit {
   submitNewTodoForm: FormGroup;
   range: FormGroup;
   status = ['Working', 'New', 'Done', 'Cancelled'];
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
   selectedStatusOption = '';
-  selectedMonthOption = '';
+
+
 
   constructor(private snackbar: MatSnackBar, public dialogRef: MatDialogRef<AddNewTodoDialogComponent>) { 
 
@@ -50,6 +50,7 @@ export class AddNewTodoDialogComponent implements OnInit {
     this.snackbar.open('todo data is printed in the console', 'Dismiss', {duration: 5000, panelClass: ['dark-snackbar']});
 
   }
+
 
   cancel(): void {
     this.dialogRef.close();

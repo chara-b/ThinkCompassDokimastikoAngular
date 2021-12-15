@@ -1,31 +1,24 @@
 <form (ngSubmit)="save_todo()" [formGroup]='submitNewTodoForm' autocomplete="off">
-    <div mat-dialog-title style="margin: auto!important;">
-        <div mat-dialog-title class="product-window-title">
-            <div class="p-sm product-window">
-                <span style="color:#707070;">Create a new Todo</span>
+     
+            <div class="row p-3 add-new-todo-dialog-header">
+                <span class="col-md-6">Create Todo</span>
 
-                <span style="display: inline-flex;margin-left: auto;" (click)="cancel()" class="mr-sm">
-                    <i class="material-icons" style="margin:auto 0;cursor: pointer;">clear</i>
+                <span class="col-md-6 right-align" (click)="cancel()">
+                    <i class="material-icons" style="cursor: pointer;">clear</i>
                 </span>
-            </div>
-        </div>
-    </div>
-    <div mat-dialog-content class="product-form-window">
+            </div>     
+ 
+ 
+            <div class="row">
 
-        <div class="mt-3 font-bold size-font-small group-header-product text-center"> ΒΑΣΙΚΑ ΣΤΟΙΧΕΙΑ </div>
-        <br>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-12">
-
-                <mat-form-field class="search-width mr-2 ml-2">
+                <mat-form-field class="text-width mr-2 ml-2 mt-3">
                     <mat-label>Text</mat-label>
                     <input formControlName='keimeno' matInput #message maxlength="256" placeholder="Enter Text...">
                     <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                 </mat-form-field>
-
-
-                <label>Date Created - Due Date<span  class="product-required" style="color:red;margin-left:3px;font-size: 16px;line-height: 13px;">*</span></label>
-                <mat-form-field standalone="true">
+            </div>
+            <div class="row">
+                <mat-form-field class="text-width" standalone="true">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                       <input matStartDate formControlName="start" placeholder="Start date">
@@ -37,27 +30,28 @@
                     <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
                     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
                 </mat-form-field>
-
+            </div>
 
                 
-
-                <mat-form-field class="mat-form-field-width mr-2 ml-2">
+            <div class="row">
+                <mat-form-field class="text-width mr-2 ml-2">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName='status' [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
-                       <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
+                       <mat-option *ngFor="let option of status" [value]="option">{{option}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
 
-        </div>
+
 
         <br>
 
-        <div class="product-create-outer">
-            <button class="btn product-create-btn" type="submit">
+        <div class="row flex-center">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!submitNewTodoForm.get('keimeno').value || !range.get('start').value || !range.get('end').value || !submitNewTodoForm.get('status').value">
                 <mat-icon>save</mat-icon>
                 <span>Αποθήκευση</span>
             </button>
+      
         </div>
-    </div>
+   
 </form>
