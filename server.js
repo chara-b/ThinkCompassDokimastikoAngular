@@ -54,9 +54,11 @@ app.post('/api/addtodo', function(req, res) {
        
         if(err) {
             res.send({serversais: 'Error no todo inserted'});
+            console.log(err)
         }
         else {
             res.send({serversais: 'Successfully inserted into DataBase'});
+            console.log(res)
         }
     });
 
@@ -71,7 +73,7 @@ app.post('/api/addtodo', function(req, res) {
 
 
 // get todos
-app.post('/api/gettodo', (req, res) => {
+app.post('/api/gettodos', (req, res) => {
 
     connection.query('SELECT keimeno, date_created, date_due, status FROM todos', (err, rows) => {
         if(err) {
@@ -126,7 +128,7 @@ app.post('/api/deletemultipletodo', function(req, res){
 });
 
 // put/update todo status
-app.post('api/updatetodostatus', function(req, res){
+app.post('/api/updatetodostatus', function(req, res){
 
 connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, req.body.id], function(err) {
        
@@ -141,7 +143,7 @@ connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, r
 });
 
 // put/update multiple todos status
-app.post('api/updatemultipletodostatus', function(req, res){
+app.post('/api/updatemultipletodostatus', function(req, res){
 
     if(req.body.status === 'Done'){
         connection.query('UPDATE todos SET status = ?, date_due = NOW() where id IN (?)', [req.body.status, req.body.ids], function(err) {

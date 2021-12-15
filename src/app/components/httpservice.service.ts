@@ -7,7 +7,7 @@ import { Todo } from '../post';
   providedIn: 'root'
 })
 export class HttpserviceService {
-  readonly ROOT_URL = 'http://localhost:3000/';  // URL to web api
+  readonly ROOT_URL = 'http://localhost:3000';  // URL to web api
 
   httpOptions = {
     // tslint:disable-next-line:max-line-length
@@ -22,5 +22,40 @@ export class HttpserviceService {
       const todo = JSON.stringify(_todo); // this holds just the todo
   
       return this.http.post(this.ROOT_URL + '/api/addtodo', todo, this.httpOptions);
+    }
+
+    // Get Todos from db
+    getTodos() {
+
+      return this.http.get<any[]>(this.ROOT_URL + '/api/gettodos');
+    }
+
+    // Delete a Todo from db
+    deleteTodo(id: Number) {
+
+      return this.http.post(this.ROOT_URL + '/api/deletetodo', id, this.httpOptions);
+    }
+
+    // Delete Multiple Todos from db
+    deleteMultipleTodo(ids: Number) {
+
+      
+      return this.http.post(this.ROOT_URL + '/api/deletemultipletodo', ids, this.httpOptions);
+    }
+
+    // Update a Todo status in db
+    updateTodoStatus(_todo: Todo, id: Number) {
+
+      const status = JSON.stringify(_todo.status); // this holds just the todo status only
+  
+      return this.http.post(this.ROOT_URL + '/api/updatetodostatus', [status, id], this.httpOptions);
+    }
+
+    // Update a Todos status in db
+    updateMultipleTodosStatus(_todo: Todo, ids: Array<Number>) {
+
+      const status = JSON.stringify(_todo.status); // this holds just the todo status only
+  
+      return this.http.post(this.ROOT_URL + '/api/updatemultipletodostatus', [status, ids], this.httpOptions);
     }
 }
