@@ -130,8 +130,9 @@ app.post('/api/deletemultipletodo', function(req, res){
 
 // put/update todo status
 app.post('/api/updatetodostatus', function(req, res){
-
-connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, req.body.id], function(err) {
+        
+    if(req.body.status === 'Done'){
+        connection.query('UPDATE todos SET status = ?, date_due = NOW() where id = ?', [req.body.status, req.body.id], function(err) {
        
             if(err) {
                res.send({serversais: 'Error no data updated'});
@@ -140,6 +141,19 @@ connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, r
                res.send({serversais: 'Selected todo has been successfully updated'});
             }
           });
+    } else if(req.body.status !== 'Done') {
+        connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, req.body.id], function(err) {
+       
+            if(err) {
+               res.send({serversais: 'Error no data updated'});
+            }
+           else {
+               res.send({serversais: 'Selected todo has been successfully updated'});
+            }
+          });
+    }
+
+
 
 });
 
