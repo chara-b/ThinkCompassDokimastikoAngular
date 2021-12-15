@@ -27,7 +27,6 @@ export class GridComponent implements OnInit {
 
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent;
-  todos: Todo[];
   sortedTodos: Todo[];
 
   selectAll: selectAll = {
@@ -40,14 +39,13 @@ export class GridComponent implements OnInit {
   allComplete: boolean = false;
 
   constructor( private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
-    this.sortedTodos = this.todos;
+
   }
 
   ngOnInit(): void {
     this.http.getTodos().subscribe((res: any) => {
       console.log(res)
-      this.todos = res;
-      this.sortedTodos = this.todos.slice();
+      this.sortedTodos = res.slice();
       for (const todo of this.sortedTodos) {
         this.selectAll.subSelects.push({todo: todo, completed: false, color: 'primary'});
       }
@@ -94,7 +92,7 @@ export class GridComponent implements OnInit {
 
 
   sortTodos(sort: Sort) {
-    const data = this.todos.slice();
+    const data = this.sortedTodos.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedTodos = data;
       return;
