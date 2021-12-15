@@ -77,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     PerfectScrollbarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PlotlyModule
   ],
   providers: [
     HttpserviceService,  
