@@ -1,8 +1,11 @@
 <div class="table-responsive">
-    <table matSort (matSortChange)="sortData($event)" class="table table-hover table-primary table-striped mat-elevation-z8">
+    <table matSort (matSortChange)="sortTodos($event)" class="table table-hover table-primary table-striped mat-elevation-z8">
         <thead>
         <tr>
-            <th scope="col">Select All</th>
+            <th scope="col">
+                <mat-checkbox [checked]="allComplete" [color]="selectAll.color" [indeterminate]="someComplete()" (change)="setAllSelected($event.checked)"></mat-checkbox>
+                {{selectAll.todo}}
+            </th>
             <th scope="col">Text</th>
             <th mat-sort-header="date_created" scope="col">Date Created</th>
             <th mat-sort-header="date_due" scope="col">Due Date</th>
@@ -17,13 +20,13 @@
         <div class="full-window">        
         <tbody *ngIf="!tableIsLoading">
         <perfect-scrollbar class="todos-scrollbar" style="margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
-        <tr *ngFor="let dessert of sortedData">
-            <td>{{dessert.name}}</td>
-            <td>{{dessert.calories}}</td>
-            <td>{{dessert.fat}}</td>
-            <td>{{dessert.carbs}}</td>
-            <td>{{dessert.protein}}</td>
-            <td>{{dessert.protein}}</td>
+        <tr *ngFor="let todo of sortedTodos; let i = index;">
+            <td> <mat-checkbox [(ngModel)]="selectAll.subSelects[i].completed" [color]="selectAll.subSelects[i].color" (ngModelChange)="updateAllComplete()"></mat-checkbox></td>
+            <td>{{todo.keimeno}}</td>
+            <td>{{todo.date_created}}</td>
+            <td>{{todo.date_due}}</td>
+            <td>{{todo.status}}</td>
+            <td><button class="ml-4 mr-2" mat-raised-button color="primary"><mat-icon>checklist</mat-icon> Todos </button></td>
         </tr>
         </perfect-scrollbar>
         </tbody>     

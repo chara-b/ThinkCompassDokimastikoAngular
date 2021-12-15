@@ -27,7 +27,7 @@ export class HttpserviceService {
     // Get Todos from db
     getTodos() {
 
-      return this.http.get<any[]>(this.ROOT_URL + '/api/gettodos');
+      return this.http.post(this.ROOT_URL + '/api/gettodos', this.httpOptions);
     }
 
     // Delete a Todo from db
