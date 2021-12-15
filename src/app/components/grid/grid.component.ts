@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { Todo } from 'src/app/post';
 import { HttpserviceService } from '../httpservice.service';
@@ -27,7 +28,7 @@ export class GridComponent implements OnInit {
 
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent;
-  sortedTodos: Todo[];
+  sortedTodos: Todo[] = [];
 
   selectAll: selectAll = {
     todo: 'ALL',
@@ -38,13 +39,20 @@ export class GridComponent implements OnInit {
 
   allComplete: boolean = false;
 
-  constructor( private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
+
+  constructor( private snackbar: MatSnackBar, private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
+    if(this.sortedTodos.length != 0 && this.selectAll.subSelects.length != 0){
+      this.sortedTodos.length = 0;
+      this.selectAll.subSelects.length = 0;
+    }
+
     this.http.getTodos().subscribe((res: any) => {
       console.log(res)
+      
       this.sortedTodos = res.slice();
       for (const todo of this.sortedTodos) {
         this.selectAll.subSelects.push({todo: todo, completed: false, color: 'primary'});
@@ -111,6 +119,23 @@ export class GridComponent implements OnInit {
     });
   }
 
+  delete(){
+
+    if(this.selectAll.subSelects.find(obj => {return obj.completed ? true : false})) {// if equals with 1 this means that we have selected 1 todo to delete so call the respective api for 1 todo deletion
+    
+      const id = this.selectAll.subSelects[0].todo.id;
+
+      this.http.deleteTodo(id).subscribe(res => {
+        this.snackbar.open('todo just deleted', 'Dismiss', {duration: 5000})
+        this.ngOnInit()
+      });
+  
+  
+
+    }else { // else call the api for multiple todos deletion
+
+    }
+  }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {

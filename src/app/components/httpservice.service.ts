@@ -31,8 +31,9 @@ export class HttpserviceService {
     }
 
     // Delete a Todo from db
-    deleteTodo(id: Number) {
-
+    deleteTodo(_id: Number) {
+      const id_ = {id: _id}
+      const id = JSON.stringify(id_)
       return this.http.post(this.ROOT_URL + '/api/deletetodo', id, this.httpOptions);
     }
 

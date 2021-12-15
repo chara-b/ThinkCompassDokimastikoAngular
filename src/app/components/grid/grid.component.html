@@ -16,7 +16,6 @@
         <tbody *ngIf="tableIsLoading">            
             <mat-spinner class="m-0"></mat-spinner>
         </tbody>
-
         <div class="full-window">        
         <tbody *ngIf="!tableIsLoading">
         <perfect-scrollbar class="todos-scrollbar" style="margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
@@ -34,12 +33,11 @@
         </tbody>     
         </div>
     </table>
-     <div class="paginator-at-the-bottom-of-screen">
-        
+     <div class="paginator-at-the-bottom-of-screen">        
         <button *ngIf="allComplete || someComplete()" 
             class="mt-4 delete-btn ml-4 mr-2" 
-            mat-fab color="primary"><mat-icon>delete</mat-icon></button>
-   
+            mat-fab color="primary" (click)="delete()"><mat-icon>delete</mat-icon>
+        </button>   
         <mat-paginator [length]="length"
                [pageSize]="pageSize"
                class="paginator-at-the-bottom-of-screen"

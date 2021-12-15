@@ -75,12 +75,13 @@ app.post('/api/addtodo', function(req, res) {
 // get todos
 app.post('/api/gettodos', (req, res) => {
 
-    connection.query('SELECT keimeno, DATE_FORMAT(date_created, "%d/%m/%Y") AS date_created, DATE_FORMAT(date_due, "%d/%m/%Y") AS date_due, status FROM todos', (err, rows) => {
+    connection.query('SELECT id, keimeno, DATE_FORMAT(date_created, "%d/%m/%Y") AS date_created, DATE_FORMAT(date_due, "%d/%m/%Y") AS date_due, status FROM todos', (err, rows) => {
         if(err) {
             res.send({serversais: 'Error... Could not get todos'});
         }
         else {
             res.send(rows)
+            console.log(rows)
         }
     })
                 
