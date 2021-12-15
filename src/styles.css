@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 /*@import "~bootstrap/dist/css/bootstrap.css";*/
 /* You can add global styles to this file, and also import other style files */
 * {
@@ -31,6 +32,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* the color of the perfect-scrollbar */
+.ps__rail-y.ps--clicking .ps__thumb-y, .ps__rail-y:focus>.ps__thumb-y, .ps__rail-y:hover>.ps__thumb-y {
+    background-color: #3f51b5 !important;
+}
+
+.ps__thumb-x, .ps__thumb-y {
+    background-color: #3f51b5 !important;
 }
 
 .paginator-at-the-bottom-of-screen { 

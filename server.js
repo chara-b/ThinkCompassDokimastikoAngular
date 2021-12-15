@@ -144,7 +144,7 @@ connection.query('UPDATE todos SET status = ? where id = ?', [req.body.status, r
 app.post('api/updatemultipletodostatus', function(req, res){
 
     if(req.body.status === 'Done'){
-        connection.query('UPDATE todos SET status = ?, dated_due = NOW() where id IN (?)', [req.body.status, req.body.ids], function(err) {
+        connection.query('UPDATE todos SET status = ?, date_due = NOW() where id IN (?)', [req.body.status, req.body.ids], function(err) {
            
             if(err) {
                res.send({serversais: 'Error no multiple todos updated'});

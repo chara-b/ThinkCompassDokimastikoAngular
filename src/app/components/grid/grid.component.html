@@ -13,7 +13,10 @@
         <tbody *ngIf="tableIsLoading">            
             <mat-spinner class="m-0"></mat-spinner>
         </tbody>
+
+        <div class="full-window">        
         <tbody *ngIf="!tableIsLoading">
+        <perfect-scrollbar class="todos-scrollbar" style="margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
         <tr *ngFor="let dessert of sortedData">
             <td>{{dessert.name}}</td>
             <td>{{dessert.calories}}</td>
@@ -22,7 +25,9 @@
             <td>{{dessert.protein}}</td>
             <td>{{dessert.protein}}</td>
         </tr>
-        </tbody>
+        </perfect-scrollbar>
+        </tbody>     
+        </div>
     </table>
     <mat-paginator [length]="length"
                [pageSize]="pageSize"

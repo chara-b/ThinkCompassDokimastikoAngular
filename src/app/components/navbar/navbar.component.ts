@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddNewTodoDialogComponent } from './add-new-todo-dialog/add-new-todo-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,7 @@ export class NavbarComponent implements OnInit {
   disabled = false;
   location: string = '/todos';
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
 
   }
 
@@ -27,7 +29,17 @@ export class NavbarComponent implements OnInit {
   }
 
   OpenPopUpToAddNewTodo(){
-    
+
+      const dialogRef = this.dialog.open(AddNewTodoDialogComponent, { // open the component AddOrgDialogComponent inside an angular material dialog popup
+        width: '500px',
+        panelClass: 'app-add-new-todo-dialog',
+        disableClose: false,
+        position: { top: '10px' },
+        data: {
+            // no data to pass inside the modal for now
+        }
+      });
+
   }
 
   NavigateTotodos(){

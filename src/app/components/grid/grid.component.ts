@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 
@@ -17,7 +19,7 @@ export interface Dessert {
   styleUrls: ['./grid.component.css']
 })
 export class GridComponent implements OnInit {
-  tableIsLoading: boolean = true;
+  tableIsLoading: boolean = false;
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -31,15 +33,36 @@ export class GridComponent implements OnInit {
     {name: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6},
     {name: 'Cupcake', calories: 305, fat: 4, carbs: 67, protein: 4},
     {name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4},
+    {name: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4},
+    {name: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6},
+    {name: 'Cupcake', calories: 305, fat: 4, carbs: 67, protein: 4},
+    {name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4},
+    {name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4},
   ];
 
   sortedData: Dessert[];
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
     this.sortedData = this.desserts.slice();
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+
+    setTimeout(() => { // arrow function here prevents the can not find 'this' error since it is 
+      // out of scope when we call it inside setTimeout so the arrow function here solves this problem .. the other
+      // method of .bind(this) to setTimeout didn't work it couldn't bind/bring 'this' inside the setTimeout scope
+        /*automatos upologismos tou height gia olo to table afairontas to upsos tou pagination gia na einai sticky*/
+        let todosWindow = this.document.getElementsByClassName('full-window');// the whole tbody area
+        let todosScrollbar = this.document.getElementsByClassName('todos-scrollbar');//the scrollbar area inside tbody
+        let responsiveHeight = todosWindow[0].offsetHeight-210;//whole window-the paginator height
+  
+        todosScrollbar[0].style.maxHeight = responsiveHeight + 'px';//so this way we get the subtracted
+        // tbody height and we set it as our scrollbar's height in which the
+        // scrollbar appears and in which the main content of the tbody must wraps since it is larger
+    } , 500);
   }
 
 
@@ -53,16 +76,10 @@ export class GridComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'name':
-          return compare(a.name, b.name, isAsc);
-        case 'calories':
-          return compare(a.calories, b.calories, isAsc);
-        case 'fat':
+        case 'date_created':
           return compare(a.fat, b.fat, isAsc);
-        case 'carbs':
+        case 'date_due':
           return compare(a.carbs, b.carbs, isAsc);
-        case 'protein':
-          return compare(a.protein, b.protein, isAsc);
         default:
           return 0;
       }
