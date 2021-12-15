@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, ArrayOfParentComponents } from './app-routing.module';
-import { ButtonComponent } from './components/button/button.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddNewTodoDialogComponent } from './components/navbar/add-new-todo-dialog/add-new-todo-dialog.component';
 import { HttpserviceService } from './components/httpservice.service';
@@ -48,7 +47,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonComponent,
     NavbarComponent,
     AddNewTodoDialogComponent,
     ArrayOfParentComponents,
