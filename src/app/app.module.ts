@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule, ArrayOfParentComponents } from './app-routing.module';
 import { ButtonComponent } from './components/button/button.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FiltersComponent } from './components/navbar/filters/filters.component';
 import { AddNewTodoDialogComponent } from './components/navbar/add-new-todo-dialog/add-new-todo-dialog.component';
 import { HttpserviceService } from './components/httpservice.service';
 
@@ -45,7 +44,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     ButtonComponent,
     NavbarComponent,
-    FiltersComponent,
     AddNewTodoDialogComponent,
     ArrayOfParentComponents // this array holds AppComponent and GridComponent declarations .. it is exported at app-routing.module.ts and since we wrap the declarations in this array we don't need to declare those components separately again as the rest components
   ],

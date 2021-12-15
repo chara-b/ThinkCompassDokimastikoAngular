@@ -10,7 +10,10 @@ import { AddNewTodoDialogComponent } from './add-new-todo-dialog/add-new-todo-di
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  status = ['Working', 'New', 'Done', 'Cancelled'];
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
+  selectedStatusOption = '';
+  selectedMonthOption = '';
   checked = false;
   color: ThemePalette = 'accent';
   disabled = false;
