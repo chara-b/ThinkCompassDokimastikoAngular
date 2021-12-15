@@ -38,9 +38,9 @@ export class HttpserviceService {
     }
 
     // Delete Multiple Todos from db
-    deleteMultipleTodo(ids: Number) {
-
-      
+    deleteMultipleTodo(_ids: Array<Number>) {
+      const ids_ = {ids: _ids}
+      const ids = JSON.stringify(ids_)      
       return this.http.post(this.ROOT_URL + '/api/deletemultipletodo', ids, this.httpOptions);
     }
 

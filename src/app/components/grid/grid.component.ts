@@ -120,8 +120,8 @@ export class GridComponent implements OnInit {
   }
 
   delete(){
-
-    if(this.selectAll.subSelects.find(obj => {return obj.completed ? true : false})) {// if equals with 1 this means that we have selected 1 todo to delete so call the respective api for 1 todo deletion
+    let completedTodosArray = this.selectAll.subSelects.filter(obj => {return obj.completed == true})
+    if(completedTodosArray.length == 1) {// if equals with 1 this means that we have selected 1 todo to delete so call the respective api for 1 todo deletion
     
       const id = this.selectAll.subSelects[0].todo.id;
 
@@ -133,7 +133,16 @@ export class GridComponent implements OnInit {
   
 
     }else { // else call the api for multiple todos deletion
-
+      let ids: Array<Number> = [];
+      completedTodosArray.forEach(todo => {//this todo parameter here is a whole object with properties todo completed and color
+        ids.push(todo.todo.id);
+      });
+      
+      this.http.deleteMultipleTodo(ids).subscribe(res => {
+        this.snackbar.open('todo just deleted', 'Dismiss', {duration: 5000})
+        this.ngOnInit()
+      });
+  
     }
   }
 
