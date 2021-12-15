@@ -6,6 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { Todo } from 'src/app/post';
+import { DataserviceService } from '../dataservice.service';
 import { HttpserviceService } from '../httpservice.service';
 import { EditStatusDialogComponent } from './edit-status-dialog/edit-status-dialog.component';
 
@@ -41,7 +42,7 @@ export class GridComponent implements OnInit {
   allComplete: boolean = false;
 
 
-  constructor( private snackbar: MatSnackBar, private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
+  constructor(private transferedData: DataserviceService, private snackbar: MatSnackBar, private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
 
   }
 
@@ -62,6 +63,39 @@ export class GridComponent implements OnInit {
 
   }
 
+  StatusFilter(){
+    this.transferedData.STATUS.subscribe(status => {
+
+      if(status !== '' && status !== 'All'){
+        this.sortedTodos = this.sortedTodos.filter(todo => todo.status === status)
+      }else if(status === 'All') {
+        this.ngOnInit();
+      }
+
+    });
+  }
+  MonthFilter(){
+    this.transferedData.STATUS.subscribe(month => {
+
+   
+
+    });
+  }
+  YearFilter(){
+    this.transferedData.STATUS.subscribe(year => {
+
+   
+
+    });
+  }
+  KeimenoFilter(){
+    this.transferedData.STATUS.subscribe(keimeno => {
+
+   
+
+    });
+  }
+  
   ngAfterViewInit() {
 
     setTimeout(() => { // arrow function here prevents the can not find 'this' error since it is 
@@ -118,9 +152,6 @@ export class GridComponent implements OnInit {
           return 0;
       }
     });
-  }
-  TodoSubmittedSoRefreshTable(){
-    this.ngOnInit();
   }
 
 

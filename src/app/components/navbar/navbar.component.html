@@ -27,23 +27,23 @@
                    <div *ngIf="checked">
                       <mat-form-field class="mr-3 mat-form-field-width">
                            <mat-label>Month</mat-label>
-                           <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
+                           <mat-select [(value)]="selectedMonthOption" (click)="updateMonthObservableWithValueSelected()"> <!--2-way data binding with the value that the user each time selects-->
                                <mat-option *ngFor="let option of months" value="option">{{option}}</mat-option>
                                </mat-select>
                            </mat-form-field>
                            <mat-form-field class="mr-3 mat-form-field-width">
                                <mat-label>Year</mat-label>
-                               <input matInput placeholder="Enter year...">
+                               <input [(ngModel)]="year" matInput placeholder="Enter year..." (click)="updateYearObservableWithValueSelected()">
                            </mat-form-field>
                            <mat-form-field class="mr-3 mat-form-field-width">
                                <mat-label>Status</mat-label>
-                               <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
-                                  <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
+                               <mat-select> <!--2-way data binding with the value that the user each time selects-->
+                                  <mat-option *ngFor="let option of status" value="option" (click)="updateStatusObservableWithValueSelected(option)">{{option}}</mat-option>
                                </mat-select>
                            </mat-form-field>
                            <mat-form-field class="ml-3 search-width">
                                <mat-label>Search</mat-label>
-                               <input matInput #message maxlength="256" placeholder="Search by keywords...">
+                               <input [(ngModel)]="keimeno" matInput #message maxlength="256" placeholder="Search by keywords..." (click)="updateKeimenoObservableWithValueSelected()">
                                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                            </mat-form-field>       
                     </div>

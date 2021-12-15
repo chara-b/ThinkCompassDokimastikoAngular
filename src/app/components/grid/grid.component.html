@@ -1,4 +1,4 @@
-<div class="table-responsive" (newTodoSubmitted)="TodoSubmittedSoRefreshTable()">
+<div class="table-responsive">
     <table matSort (matSortChange)="sortTodos($event)" class="table table-hover table-primary table-striped mat-elevation-z8">
         <thead>
         <tr>
@@ -37,7 +37,14 @@
         <button *ngIf="allComplete || someComplete()" 
         class="mt-4 update-btn ml-4 mr-2" 
         mat-fab color="primary" (click)="edit()"><mat-icon>edit</mat-icon>
-    </button>    
+    </button>  
+
+
+    <button
+    class="mt-4 delete-btn ml-4 mr-2" 
+    mat-fab color="primary" (click)="StatusFilter()"><mat-icon>delete</mat-icon>
+</button>  
+
         <mat-paginator [length]="length"
                [pageSize]="pageSize"
                class="paginator-at-the-bottom-of-screen"
