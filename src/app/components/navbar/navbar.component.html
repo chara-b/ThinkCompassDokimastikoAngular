@@ -23,25 +23,25 @@
                     Filters {{checked ? 'on' : 'off'}} 
                 </mat-slide-toggle>
                 </div>
-                <div class="col-md-5 filters-height" *ngIf="!location.includes('/histogram')" style="background-color: rgb(131, 192, 113);">                      
+                <div class="col-md-5 filters-height" *ngIf="!location.includes('/histogram')">                      
                    <div *ngIf="checked">
-                      <mat-form-field class="mat-form-field-width">
+                      <mat-form-field class="mr-3 mat-form-field-width">
                            <mat-label>Month</mat-label>
                            <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
                                <mat-option *ngFor="let option of months" value="option">{{option}}</mat-option>
                                </mat-select>
                            </mat-form-field>
-                           <mat-form-field class="mat-form-field-width">
+                           <mat-form-field class="mr-3 mat-form-field-width">
                                <mat-label>Year</mat-label>
                                <input matInput placeholder="Enter year...">
                            </mat-form-field>
-                           <mat-form-field class="mat-form-field-width">
+                           <mat-form-field class="mr-3 mat-form-field-width">
                                <mat-label>Status</mat-label>
                                <mat-select [(value)]="selectedStatusOption"> <!--2-way data binding with the value that the user each time selects-->
                                   <mat-option *ngFor="let option of status" value="option">{{option}}</mat-option>
                                </mat-select>
                            </mat-form-field>
-                           <mat-form-field class="search-width">
+                           <mat-form-field class="ml-3 search-width">
                                <mat-label>Search</mat-label>
                                <input matInput #message maxlength="256" placeholder="Search by keywords...">
                                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
