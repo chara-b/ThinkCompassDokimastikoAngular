@@ -26,17 +26,26 @@
             <td>{{todo.date_created}}</td>
             <td>{{todo.date_due}}</td>
             <td>{{todo.status}}</td>
-            <td><button class="ml-4 mr-2" mat-raised-button color="primary"><mat-icon>checklist</mat-icon> Todos </button></td>
+            <td>
+                <button class="ml-4 mr-2" mat-raised-button color="primary"><mat-icon>edit</mat-icon> Edit </button>
+            </td>
         </tr>
         </perfect-scrollbar>
         </tbody>     
         </div>
     </table>
-    <mat-paginator [length]="length"
+     <div class="paginator-at-the-bottom-of-screen">
+        
+        <button *ngIf="allComplete || someComplete()" 
+            class="mt-4 delete-btn ml-4 mr-2" 
+            mat-fab color="primary"><mat-icon>delete</mat-icon></button>
+   
+        <mat-paginator [length]="length"
                [pageSize]="pageSize"
                class="paginator-at-the-bottom-of-screen"
                [pageSizeOptions]="pageSizeOptions"
                (page)="pageEvent = $event"
                aria-label="Select page">
-    </mat-paginator>
+        </mat-paginator>
+    </div>
 </div>

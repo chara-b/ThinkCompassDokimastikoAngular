@@ -10,4 +10,11 @@ table {
     width: 100% !important;
 }
 
+.delete-btn {
+    background-color: rgb(44, 56, 126);
+}
+.delete-btn:hover {
+    background-color: tomato;
+}
+
 
