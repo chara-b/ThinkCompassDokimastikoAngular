@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
+import * as moment from 'moment';
 import { Todo } from 'src/app/post';
 import { DataserviceService } from '../dataservice.service';
 import { HttpserviceService } from '../httpservice.service';
@@ -253,11 +254,23 @@ export class GridComponent implements OnInit {
 
     this.sortedTodos = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
+      
+      var dateMomentObjectA = moment(a.date_created, "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var dateObjectA = dateMomentObjectA.toDate(); // convert moment.js object to Date object
+      var dateMomentObjectB = moment(b.date_created, "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var dateObjectB = dateMomentObjectB.toDate(); // convert moment.js object to Date object
+
+
+      var dateMomentObjectC = moment(a.date_due, "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var dateObjectC = dateMomentObjectC.toDate(); // convert moment.js object to Date object
+      var dateMomentObjectD = moment(b.date_due, "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var dateObjectD = dateMomentObjectD.toDate(); // convert moment.js object to Date object
+
       switch (sort.active) {
         case 'date_created':
-          return compare(a.date_created, b.date_created, isAsc);
+          return compare(dateObjectA, dateObjectB, isAsc);
         case 'date_due':
-          return compare(a.date_due, b.date_due, isAsc);
+          return compare(dateObjectC, dateObjectD, isAsc);
         default:
           return 0;
       }
@@ -343,6 +356,6 @@ export class GridComponent implements OnInit {
   }
 }
 
-function compare(a: number | string, b: number | string, isAsc: boolean) {
+function compare(a: any, b: any, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
