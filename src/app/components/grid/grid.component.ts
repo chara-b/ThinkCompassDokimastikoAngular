@@ -64,10 +64,18 @@ export class GridComponent implements OnInit {
   }
 
   StatusFilter(){
+
     this.transferedData.STATUS.subscribe(status => {
 
-      if(status !== '' && status !== 'All'){
-        this.sortedTodos = this.sortedTodos.filter(todo => todo.status === status)
+      if(status !== '' && status !== 'All'){  
+        this.sortedTodos.length = 0;
+        // todos array is of type selectAll[]
+        let todos = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
+        todos.forEach(todo => {
+          this.sortedTodos.push(todo.todo);
+        });
+  
+       
       }else if(status === 'All') {
         this.ngOnInit();
       }

@@ -15,9 +15,14 @@
         <tbody *ngIf="tableIsLoading">            
             <mat-spinner class="m-0"></mat-spinner>
         </tbody>
-        <div class="full-window">        
+  
+       <div class="full-window">      
         <tbody *ngIf="!tableIsLoading">
+            
+                
+   
         <perfect-scrollbar class="todos-scrollbar" style="margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
+            <div *ngIf="sortedTodos.length == 0">No Todos found  </div>    
         <tr *ngFor="let todo of sortedTodos; let i = index;">
             <td> <mat-checkbox [(ngModel)]="selectAll.subSelects[i].completed" [color]="selectAll.subSelects[i].color" (ngModelChange)="updateAllComplete()"></mat-checkbox></td>
             <td>{{todo.keimeno}}</td>
@@ -25,9 +30,9 @@
             <td>{{todo.date_due}}</td>
             <td>{{todo.status}}</td>
         </tr>
-        </perfect-scrollbar>
+       </perfect-scrollbar>
         </tbody>     
-        </div>
+      </div>
     </table>
      <div class="paginator-at-the-bottom-of-screen">        
         <button *ngIf="allComplete || someComplete()" 
