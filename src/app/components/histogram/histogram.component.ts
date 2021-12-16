@@ -14,7 +14,7 @@ export class HistogramComponent implements OnInit {
        // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
         { x: [1,2,3], y: [2,6,3], type: 'bar' },
     ],
-    layout: {autosize: true, title: 'Todos Done Per Day', xaxis: {type:'category'}}
+    layout: {autosize: true, title: 'Todos Done Per Day (Due Date is taken for this plot considered)', xaxis: {type:'category'}}
   };
   todos_done:any = []
   groupedTodosOverDate_Due: any;
@@ -47,7 +47,7 @@ export class HistogramComponent implements OnInit {
            // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
             { x: this.dates, y: this.done, type: 'bar' },
         ],
-        layout: {autosize: true, title: 'Todos Done Per Day', xaxis: {type:'category'}},
+        layout: {autosize: true, title: 'Todos Done Per Day (Due Date is taken for this plot considered)', xaxis: {type:'category'}},
 
       };
       console.log(this.graph.data)
