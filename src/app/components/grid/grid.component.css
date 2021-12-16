@@ -33,5 +33,11 @@ table {
 .filter-btn:hover {
     background-color:peru;
 }
+.refresh-btn {
+    background-color: rgb(44, 56, 126);
+}
 
+.refresh-btn:hover {
+    background-color:slateblue;
+}
 

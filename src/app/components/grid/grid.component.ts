@@ -89,6 +89,14 @@ export class GridComponent implements OnInit {
     return Number(date_due.split('/')[0])
   }
 
+
+  ApplyFilters(){
+    this.StatusFilter()
+    this.MonthFilter()
+    this.YearFilter()
+    this.KeimenoFilter()
+  }
+
   StatusFilter(){
 
     this.transferedData.STATUS.subscribe(status => {
@@ -97,15 +105,19 @@ export class GridComponent implements OnInit {
      //   this.ngOnInit();
     //  }
       if(status !== '' && status !== 'All'){  
-        this.sortedTodos.length = 0;
-        // todos array is of type selectAll[]
-        let todos = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
-        todos.forEach(todo => {
-          this.sortedTodos.push(todo.todo);
-        });
+        this.ngOnInit();
+        setTimeout(() => {
+          this.sortedTodos.length = 0;
+          // todos array is of type selectAll[]
+          let todos = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
+          todos.forEach(todo => {
+            this.sortedTodos.push(todo.todo);
+          });      
+          
+          this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
 
-        this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
-
+        }, 500);
+       
        
       }else if(status === 'All') {
         this.ngOnInit();
