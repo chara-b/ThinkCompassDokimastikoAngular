@@ -26,13 +26,13 @@
                 <div class="col-md-5 filters-height" *ngIf="!location.includes('/histogram')">                      
                    <div *ngIf="checked">
                       <mat-form-field class="mr-3 mat-form-field-width">
-                           <mat-label>Month</mat-label>
+                           <mat-label>Month (of Due Date)</mat-label>
                            <mat-select [(value)]="selectedMonthOption"> <!--2-way data binding with the value that the user each time selects-->
                                <mat-option *ngFor="let option of months" (click)="updateMonthObservableWithValueSelected(option)" value="option">{{option}}</mat-option>
                                </mat-select>
                            </mat-form-field>
                            <mat-form-field class="mr-3 mat-form-field-width">
-                               <mat-label>Year</mat-label>
+                               <mat-label>Year (of Due Date)</mat-label>
                                <input [(ngModel)]="year" matInput placeholder="Enter year..." (change)="updateYearObservableWithValueSelected()">
                            </mat-form-field>
                            <mat-form-field class="mr-3 mat-form-field-width">
