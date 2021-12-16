@@ -88,6 +88,13 @@ export class GridComponent implements OnInit {
   ConvertToInt(date_due: any) {
     return Number(date_due.split('/')[0])
   }
+  ConvertToIntTheMonthOnly(date_due: any) {
+    return Number(date_due.split('/')[1])
+  }
+  ConvertToIntTheYearOnly(date_due: any) {
+    return Number(date_due.split('/')[2])
+  }
+
 
 
   ApplyFilters(){
@@ -125,14 +132,48 @@ export class GridComponent implements OnInit {
   }
   MonthFilter(){
     this.transferedData.MONTH.subscribe(month => {
-
+      if(month !== ''){  
+        // this.ngOnInit();
+         setTimeout(() => {
+           this.sortedTodos.length = 0;
+           // todos array is of type selectAll[]
+           let todos = this.selectAll.subSelects.filter(todo =>  this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(month))
+           todos.forEach(todo => {
+             this.sortedTodos.push(todo.todo);
+           });      
+           
+           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(month))
+ 
+         }, 500);
+        
+        
+       }else if(month === '') {
+         this.ngOnInit();
+       }
    
 
     });
   }
   YearFilter(){
     this.transferedData.YEAR.subscribe(year => {
-
+      if(year !== ''){  
+        // this.ngOnInit();
+         setTimeout(() => {
+           this.sortedTodos.length = 0;
+           // todos array is of type selectAll[]
+           let todos = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(year))
+           todos.forEach(todo => {
+             this.sortedTodos.push(todo.todo);
+           });      
+           
+           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(year))
+ 
+         }, 500);
+        
+        
+       }else if(year === '') {
+         this.ngOnInit();
+       }
    
 
     });
