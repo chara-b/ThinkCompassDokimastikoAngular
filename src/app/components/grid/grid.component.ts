@@ -24,7 +24,9 @@ export interface selectAll {
 })
 export class GridComponent implements OnInit {
   tableIsLoading: boolean = false;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -98,7 +100,7 @@ export class GridComponent implements OnInit {
 
 
   ApplyFilters(){
-    this.StatusFilter()
+    this.KeimenoFilter()
 
   }
 
@@ -133,16 +135,17 @@ export class GridComponent implements OnInit {
   MonthFilter(){
     this.transferedData.MONTH.subscribe(month => {
       if(month !== ''){  
-        // this.ngOnInit();
+       let month_index = this.months.indexOf(month) + 1; // we can not compare the month string name with the 30/12/2021 2nd part of the date which is a nomber so that's why we get the index of the month from the array +1 because the array starts counting from 0 and our months start from 01 which is january
+         this.ngOnInit();
          setTimeout(() => {
            this.sortedTodos.length = 0;
            // todos array is of type selectAll[]
-           let todos = this.selectAll.subSelects.filter(todo =>  this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(month))
+           let todos = this.selectAll.subSelects.filter(todo =>  this.ConvertToIntTheMonthOnly(todo.todo.date_due) == month_index)
            todos.forEach(todo => {
              this.sortedTodos.push(todo.todo);
            });      
            
-           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(month))
+           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == month_index)
  
          }, 500);
         
@@ -182,7 +185,7 @@ export class GridComponent implements OnInit {
     this.transferedData.KEIMENO.subscribe(keimeno => {
 
       if(keimeno !== ''){  
-       // this.ngOnInit();
+        this.ngOnInit();
         setTimeout(() => {
           this.sortedTodos.length = 0;
           // todos array is of type selectAll[]

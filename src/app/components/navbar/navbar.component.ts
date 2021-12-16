@@ -14,7 +14,7 @@ import { AddNewTodoDialogComponent } from './add-new-todo-dialog/add-new-todo-di
 export class NavbarComponent implements OnInit {
 //  @Output() newTodoSubmitted: EventEmitter<Todo> =  new EventEmitter;
   status = ['All', 'Working', 'New', 'Done', 'Cancelled'];
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   selectedStatusOption = ''; // the filter value in the navbar that the user typed
   selectedMonthOption = ''; // the filter value in the navbar that the user typed
   year = '';// the filter value in the navbar that the user typed
@@ -39,8 +39,8 @@ export class NavbarComponent implements OnInit {
     this.checked = !this.checked
   }
 
-  updateMonthObservableWithValueSelected() {
-    this.transferData.changeMonth(this.selectedMonthOption);
+  updateMonthObservableWithValueSelected(option: string) {
+    this.transferData.changeMonth(option);
   }
 
   updateKeimenoObservableWithValueSelected() {
