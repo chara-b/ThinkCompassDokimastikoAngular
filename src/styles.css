@@ -68,6 +68,18 @@ mat-spinner svg {
   width: 60% !important;
 }
 
+
+tbody, thead tr { 
+  display: block !important; 
+}
+
+tbody td, thead th {
+  width: 300px !important;
+}
+
+
+
+
 /* custom scrollbar */
 
   /* width */

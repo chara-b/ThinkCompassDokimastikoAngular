@@ -92,9 +92,7 @@ export class GridComponent implements OnInit {
 
   ApplyFilters(){
     this.StatusFilter()
-    this.MonthFilter()
-    this.YearFilter()
-    this.KeimenoFilter()
+
   }
 
   StatusFilter(){
@@ -126,23 +124,40 @@ export class GridComponent implements OnInit {
     });
   }
   MonthFilter(){
-    this.transferedData.STATUS.subscribe(month => {
+    this.transferedData.MONTH.subscribe(month => {
 
    
 
     });
   }
   YearFilter(){
-    this.transferedData.STATUS.subscribe(year => {
+    this.transferedData.YEAR.subscribe(year => {
 
    
 
     });
   }
   KeimenoFilter(){
-    this.transferedData.STATUS.subscribe(keimeno => {
+    this.transferedData.KEIMENO.subscribe(keimeno => {
 
-   
+      if(keimeno !== ''){  
+       // this.ngOnInit();
+        setTimeout(() => {
+          this.sortedTodos.length = 0;
+          // todos array is of type selectAll[]
+          let todos = this.selectAll.subSelects.filter(todo => todo.todo.keimeno === keimeno)
+          todos.forEach(todo => {
+            this.sortedTodos.push(todo.todo);
+          });      
+          
+          this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => todo.todo.keimeno === keimeno)
+
+        }, 500);
+       
+       
+      }else if(keimeno === '') {
+        this.ngOnInit();
+      }
 
     });
   }

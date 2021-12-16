@@ -16,13 +16,15 @@
             <mat-spinner class="m-0"></mat-spinner>
         </tbody>
   
-       <div class="full-window">      
+   
+        <div class="full-window">  
+     
         <tbody *ngIf="!tableIsLoading">
-            
+            <perfect-scrollbar class="todos-scrollbar" style="max-width: 600px; margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
+         
                 
    
-        <perfect-scrollbar class="todos-scrollbar" style="margin-left: 10px; overflow-x:hidden; position: relative; width: 100%; overflow-y: hidden; height:100vh">       
-            <div *ngIf="sortedTodos.length == 0">No Todos found  </div>    
+          <div *ngIf="sortedTodos.length == 0">No Todos found  </div>    
         <tr *ngFor="let todo of sortedTodos; let i = index;">
             <td> <mat-checkbox [(ngModel)]="selectAll.subSelects[i].completed" [color]="selectAll.subSelects[i].color" (ngModelChange)="updateAllComplete()"></mat-checkbox></td>
             <td>{{todo.keimeno}}</td>
@@ -31,8 +33,8 @@
             <td><mat-icon [ngStyle]="{'color': todo.status == 'Working' && (ConvertToInt(todo.date_due) > today || ConvertToInt(todo.date_due) == today) ? working :  ConvertToInt(todo.date_due) < today && (todo.status =='Working' || todo.status =='New') ? overdue : two_days_after_today == ConvertToInt(todo.date_due) ? to_be_expired : grey}">circle</mat-icon></td>
         </tr>
        </perfect-scrollbar>
-        </tbody>     
-      </div>
+        </tbody>   
+    </div>
     </table>
      <div class="paginator-at-the-bottom-of-screen">        
         <button *ngIf="allComplete || someComplete()" 
