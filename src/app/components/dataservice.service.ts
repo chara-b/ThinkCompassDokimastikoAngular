@@ -12,6 +12,8 @@ export class DataserviceService {
   year: any = 2021;
   month: any = 12;
 
+  filter: string = '';
+
 
 
 
@@ -28,6 +30,8 @@ MONTH = this.behaviorsubjectForMONTH.asObservable();
 private behaviorsubjectForYear = new BehaviorSubject<any>(this.year);
 YEAR = this.behaviorsubjectForYear.asObservable();
 
+private behaviorsubjectForFilter = new BehaviorSubject<any>(this.filter);
+FILTER = this.behaviorsubjectForFilter.asObservable();
 
 
 
@@ -49,6 +53,10 @@ changeYear(year: any) {
   this.behaviorsubjectForYear.next(year);
 }
 
+
+changeFilter(filter: any) {
+  this.behaviorsubjectForFilter.next(filter);
+}
 
 
 

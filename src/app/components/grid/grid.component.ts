@@ -54,6 +54,7 @@ export class GridComponent implements OnInit {
   };
 
   allComplete: boolean = false;
+  filter = '';
 
  
 
@@ -101,7 +102,19 @@ export class GridComponent implements OnInit {
 
 
   ApplyFilters(){
-    this.StatusFilter()
+    this.transferedData.FILTER.subscribe(filterActivated => {this.filter = filterActivated})
+    switch (this.filter) {
+      case 'statusfilter':
+        return this.StatusFilter()
+      case 'monthfilter':
+        return this.MonthFilter()
+      case 'yearfilter':
+        return this.YearFilter()
+      case 'keimenofilter':
+        return this.KeimenoFilter()
+      default:
+        return 0;
+    }
 
   }
 

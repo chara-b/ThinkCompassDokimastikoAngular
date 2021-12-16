@@ -41,18 +41,22 @@ export class NavbarComponent implements OnInit {
 
   updateMonthObservableWithValueSelected(option: string) {
     this.transferData.changeMonth(option);
+    this.transferData.changeFilter('monthfilter');
   }
 
   updateKeimenoObservableWithValueSelected() {
     this.transferData.changeKeimeno(this.keimeno);
+    this.transferData.changeFilter('keimenofilter');
   }
 
   updateYearObservableWithValueSelected() {
     this.transferData.changeYear(this.year);
+    this.transferData.changeFilter('yearfilter');
   }
 
   updateStatusObservableWithValueSelected(option: string) {
     this.transferData.changeStatus(option);
+    this.transferData.changeFilter('statusfilter');
   }
 
 
