@@ -101,7 +101,7 @@ export class GridComponent implements OnInit {
 
 
   ApplyFilters(){
-    this.KeimenoFilter()
+    this.StatusFilter()
 
   }
 
@@ -161,16 +161,16 @@ export class GridComponent implements OnInit {
   YearFilter(){
     this.transferedData.YEAR.subscribe(year => {
       if(year !== ''){  
-        // this.ngOnInit();
+         this.ngOnInit();
          setTimeout(() => {
            this.sortedTodos.length = 0;
            // todos array is of type selectAll[]
-           let todos = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(year))
+           let todos = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheYearOnly(todo.todo.date_due) == Number(year))
            todos.forEach(todo => {
              this.sortedTodos.push(todo.todo);
            });      
            
-           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheMonthOnly(todo.todo.date_due) == Number(year))
+           this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => this.ConvertToIntTheYearOnly(todo.todo.date_due) == Number(year))
  
          }, 500);
         
