@@ -12,9 +12,9 @@ export class HistogramComponent implements OnInit {
   public graph = {
     data: [
        // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
-        { x: [1,2,3], y: [2,6,3], type: 'histogram' },
+        { x: [1,2,3], y: [2,6,3], type: 'bar' },
     ],
-    layout: {autosize: true, title: 'Todos Done Per Day'}
+    layout: {autosize: true, title: 'Todos Done Per Day', xaxis: {type:'category'}}
   };
   todos_done:any = []
   groupedTodosOverDate_Due: any;
@@ -45,9 +45,10 @@ export class HistogramComponent implements OnInit {
       this.graph = {
         data: [
            // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
-            { x: this.dates, y: this.done, type: 'histogram' },
+            { x: this.dates, y: this.done, type: 'bar' },
         ],
-        layout: {autosize: true, title: 'Todos Done Per Day'}
+        layout: {autosize: true, title: 'Todos Done Per Day', xaxis: {type:'category'}},
+
       };
       console.log(this.graph.data)
     });
