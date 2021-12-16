@@ -28,7 +28,7 @@
             <td>{{todo.keimeno}}</td>
             <td>{{todo.date_created}}</td>
             <td>{{todo.date_due}}</td>
-            <td>{{todo.status}}</td>
+            <td><mat-icon [ngStyle]="{'color': todo.status == 'Working' && (ConvertToInt(todo.date_due) > today) ? working :  ConvertToInt(todo.date_due) < today && (todo.status =='Working' || todo.status =='New') ? overdue : two_days_after_today == ConvertToInt(todo.date_due) ? to_be_expired : grey}">circle</mat-icon></td>
         </tr>
        </perfect-scrollbar>
         </tbody>     
@@ -46,10 +46,11 @@
 
 
     <button
-    class="mt-4 delete-btn ml-4 mr-2" 
-    mat-fab color="primary" (click)="StatusFilter()"><mat-icon>delete</mat-icon>
-</button>  
-
+    style="float: right;"
+        class="mt-4 filter-btn ml-4 mr-2" 
+        mat-fab color="primary" (click)="StatusFilter()"><mat-icon>filter_alt</mat-icon>
+    </button>  
+<!--
         <mat-paginator [length]="length"
                [pageSize]="pageSize"
                class="paginator-at-the-bottom-of-screen"
@@ -57,5 +58,7 @@
                (page)="pageEvent = $event"
                aria-label="Select page">
         </mat-paginator>
+    -->
+
     </div>
 </div>

@@ -11,6 +11,7 @@ import { HttpserviceService } from './components/httpservice.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -76,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatProgressSpinnerModule,
     PerfectScrollbarModule,
     MatNativeDateModule,
-    PlotlyModule
+    PlotlyModule, 
+    NgxPaginationModule
   ],
   providers: [
     HttpserviceService,  

@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { Todo } from 'src/app/post';
@@ -24,9 +24,20 @@ export interface selectAll {
 })
 export class GridComponent implements OnInit {
   tableIsLoading: boolean = false;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  
+  overdue = 'red'
+  working = 'green'
+  to_be_expired = 'yellow'
+  grey = 'grey'
+
+  
+  today: any;
+  two_days_after_today: any;
+  expired_in_two_days: any;
 
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent;
@@ -41,12 +52,21 @@ export class GridComponent implements OnInit {
 
   allComplete: boolean = false;
 
+ 
+
 
   constructor(private transferedData: DataserviceService, private snackbar: MatSnackBar, private http: HttpserviceService, @Inject(DOCUMENT) private document: any, public dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
+    // initializations for use in the template for the colored circles for status column inside the table
+    let td = new Date
+    this.today = Number(String(td.getDate()).padStart(2, '0'));  // gets the dd of the today date as number  
+    
+    this.two_days_after_today = this.today + 2; 
+
+
     if(this.sortedTodos.length != 0 && this.selectAll.subSelects.length != 0){
       this.sortedTodos.length = 0;
       this.selectAll.subSelects.length = 0;
@@ -56,17 +76,26 @@ export class GridComponent implements OnInit {
       console.log(res)
       
       this.sortedTodos = res.slice();
+
       for (const todo of this.sortedTodos) {
+
         this.selectAll.subSelects.push({todo: todo, completed: false, color: 'primary'});
       }
     });
 
   }
 
+  ConvertToInt(date_due: any) {
+    return Number(date_due.split('/')[0])
+  }
+
   StatusFilter(){
 
     this.transferedData.STATUS.subscribe(status => {
 
+     // if(this.sortedTodos.length !== this.selectAll.subSelects.length){
+     //   this.ngOnInit();
+    //  }
       if(status !== '' && status !== 'All'){  
         this.sortedTodos.length = 0;
         // todos array is of type selectAll[]
@@ -74,7 +103,9 @@ export class GridComponent implements OnInit {
         todos.forEach(todo => {
           this.sortedTodos.push(todo.todo);
         });
-  
+
+        this.selectAll.subSelects = this.selectAll.subSelects.filter(todo => todo.todo.status === status)
+
        
       }else if(status === 'All') {
         this.ngOnInit();
@@ -177,13 +208,14 @@ export class GridComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       let completedTodosArray = this.selectAll.subSelects.filter(obj => {return obj.completed == true})
-    if(completedTodosArray.length == 1) {// if equals with 1 this means that we have selected 1 todo to update so call the respective api for 1 todo update
+    
+      if(completedTodosArray.length == 1) {// if equals with 1 this means that we have selected 1 todo to update so call the respective api for 1 todo update
   
       const status_plus_id = {status: result.status, id: completedTodosArray[0].todo.id};
 
       this.http.updateTodoStatus(status_plus_id).subscribe(res => {
         this.snackbar.open('todo just updated', 'Dismiss', {duration: 5000})
-        this.ngOnInit()
+        this.ngOnInit();
       });
   
   

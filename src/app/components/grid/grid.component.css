@@ -26,4 +26,12 @@ table {
     background-color: teal;
 }
 
+.filter-btn {
+    background-color: rgb(44, 56, 126);
+}
+
+.filter-btn:hover {
+    background-color:peru;
+}
+
 
